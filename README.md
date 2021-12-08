@@ -6,6 +6,7 @@ Projeto de Engenharia de Dados da cadeira IF997
 * Deletar linhas com strings faltantes
 * Tentar tratar caso hajam dados diferentes de bool em colunas bool
 * Deletar linhas com booleanos faltantes
+* Deletar linhas com timestamps faltantes
 
 ## Transformações de Dados Propostas:
 * timestamp (int) -> weekday (string)
