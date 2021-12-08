@@ -10,7 +10,7 @@ def converting_to_csv():
 def reading_dataset(type):
     #Reading the dataset
     if(type == 'csv'):
-        logins = pd.read_parquet('logins.csv')
+        logins = pd.read_csv('logins.csv')
         print(logins.head())
     else:
         logins = pd.read_parquet('logins.parquet5')
@@ -36,3 +36,7 @@ def dropping_nas(logins):
     #Deleting every row that has a missing timestamp
     logins2 = logins2[logins2['timestamp'].notna()]
     return logins2
+
+if __name__ == "__main__":
+    logins = reading_dataset('csv')
+    print(logins.head())
