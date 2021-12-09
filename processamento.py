@@ -37,6 +37,14 @@ def dropping_nas(logins):
     logins2 = logins2[logins2['timestamp'].notna()]
     return logins2
 
+def transform_data(logins):
+    day_divider = 86400000 # one day has 86400000 ms
+    logins['weekday'] = (logins['timestamp']/day_divider).values.astype(dtype='datetime64[D]')
+    logins['weekday'] = logins['weekday'].dt.day_name()
+    return logins
 if __name__ == "__main__":
-    logins = reading_dataset('csv')
-    print(logins.head())
+    #converting_to_csv()
+    logins = reading_dataset('parquet')
+    #print(logins.head())
+    logins_updated = transform_data(logins)
+    print(logins_updated.head())
