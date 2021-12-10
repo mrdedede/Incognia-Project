@@ -7,8 +7,8 @@ def converting_to_csv():
     logins = pd.read_parquet('logins.parquet5')
     logins.to_csv('logins.csv')
 
-def reading_dataset(type):
-    #Reading the dataset
+def reading_loginsset(type):
+    #Reading the loginsset
     if(type == 'csv'):
         logins = pd.read_csv('logins.csv')
         print(logins.head())
@@ -18,8 +18,24 @@ def reading_dataset(type):
     return logins
 
 #pre-processing
+def transform_bool(logins):
+    #Transformando float em inteiro
+    logins['is_from_official_store'] = logins['is_from_official_store'].astype(int)
+    logins['is_emulator'] = logins['is_emulator'].astype(int)
+    logins['has_fake_location_app'] = logins['has_fake_location_app'].astype(int)
+    logins['has_fake_location_enabled'] = logins['has_fake_location_enabled'].astype(int)
+    logins['probable_root'] = logins['probable_root'].astype(int)
+    logins['never_permitted_location_on_account'] = logins['never_permitted_location_on_account'].astype(int)
+    logins['ato'] = logins['ato'].astype(int)
+
 def dropping_nas(logins):
-    #Deleting every row that has missing strings 
+    # Tratando todas as linhas com inteiros ausentes
+    logins['max_installations_on_related_devices'] = logins['max_installations_on_related_devices'].fillna(logins['max_installations_on_related_devices'].mean()) 
+    logins['boot_count'] = logins['boot_count'].fillna(logins['boot_count'].mean())
+    logins['wallpaper_count'] = logins['wallpaper_count'].fillna(logins['wallpaper_count'].mean())
+    logins['n_accounts'] = logins['n_accounts'].fillna(logins['n_accounts'].mean())
+    
+    #Deleting every row that has missing strings
     logins2 = logins[logins['id'].notna() &
                 logins['account_id'].notna() &
                 logins['device_id'].notna() &
@@ -39,7 +55,7 @@ def dropping_nas(logins):
     return logins2
 #add new columnns
 
-def transform_data(logins):
+def transform_logins(logins):
     # 1) timestamp (int) -> weekday (string)
     day_divider = 86400000 # one day has 86400000 ms
     logins['weekday'] = (logins['timestamp']/day_divider).values.astype(dtype='datetime64[D]')
@@ -60,8 +76,9 @@ def transform_data(logins):
     return logins
 if __name__ == "__main__":
     #converting_to_csv()
-    logins = reading_dataset('parquet')
+    logins = reading_loginsset('parquet')
     #print(logins.head())
+    bool_update = transform_bool(logins)
     logins_dropna = dropping_nas(logins)
-    logins_updated = transform_data(logins_dropna)
+    logins_updated = transform_logins(logins_dropna)
     print(logins_updated)
