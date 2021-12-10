@@ -17,6 +17,7 @@ def reading_dataset(type):
         print(logins.head())
     return logins
 
+#pre-processing
 def dropping_nas(logins):
     #Deleting every row that has missing strings 
     logins2 = logins[logins['id'].notna() &
@@ -36,15 +37,31 @@ def dropping_nas(logins):
     #Deleting every row that has a missing timestamp
     logins2 = logins2[logins2['timestamp'].notna()]
     return logins2
+#add new columnns
 
 def transform_data(logins):
+    # 1) timestamp (int) -> weekday (string)
     day_divider = 86400000 # one day has 86400000 ms
     logins['weekday'] = (logins['timestamp']/day_divider).values.astype(dtype='datetime64[D]')
     logins['weekday'] = logins['weekday'].dt.day_name()
+    # 2) Aparelhos por conta (int)
+
+    # 3) Wallpaper por contas no dispositivo (float)
+    logins['wallpaper_per_accounts'] = logins['wallpaper_count']/logins['n_accounts']
+    # 4) Download Externo (bool) = root (true) + loja oficial (false)
+
+    #gambiarra -> logins['download_extern'] = logins.apply(lambda x: x['probable_root']*(1.0 - x['is_from_official_store']) , axis=1) 
+    logins['probable_root'] = logins['probable_root'].astype(int)
+    logins['is_from_official_store'] = logins['is_from_official_store'].astype(int)
+    logins['download_extern'] = logins['probable_root'] & (~logins['is_from_official_store']) #converting to int, its possible to make bool operations
+    
+    # 5) Instalação em dispositivo diferente? (bool) (count_installation_on_different_devices)
+    
     return logins
 if __name__ == "__main__":
     #converting_to_csv()
     logins = reading_dataset('parquet')
     #print(logins.head())
-    logins_updated = transform_data(logins)
-    print(logins_updated.head())
+    logins_dropna = dropping_nas(logins)
+    logins_updated = transform_data(logins_dropna)
+    print(logins_updated)
