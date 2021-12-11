@@ -2,3 +2,4 @@
 logins.parquet5
 logins.csv
 .vs
+__pycache__

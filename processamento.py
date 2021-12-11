@@ -138,11 +138,13 @@ def create_new_columns(logins):
     
     return logins
 
-if __name__ == "__main__":
-    logins = reading_loginsset('csv')
-    #logins = reading_loginsset('parquet')
-    #print(logins.head())
-    logins = dropping_nas(logins)
-    logins = transform_bool(logins)
-    logins = create_new_columns(logins)
-    print(logins)
+#Tudo abaixo dessa linha DEVE ser comentado após os commits, usar apenas para testes!!
+
+# if __name__ == "__main__":
+#     logins = reading_loginsset('csv')
+#     #logins = reading_loginsset('parquet')
+#     #print(logins.head())
+#     logins = dropping_nas(logins)
+#     logins = transform_bool(logins)
+#     logins = create_new_columns(logins)
+#     print(logins)

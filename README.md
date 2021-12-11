@@ -49,7 +49,7 @@ Projeto de Engenharia de Dados da cadeira IF997
 
 ## Perguntas a fazer:
 1. Será que dispositivos com mais contas por wallpapers tem associação com account takeover?
-2.
+2. O tempo que um dispositivo passa sem reiniciar tem alguma correlação com o evento de account takeover?
 3.
 4.
 5.
