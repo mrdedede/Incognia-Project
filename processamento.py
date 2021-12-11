@@ -27,7 +27,7 @@ def transform_bool(logins):
     logins['probable_root'] = logins['probable_root'].astype(int)
     logins['never_permitted_location_on_account'] = logins['never_permitted_location_on_account'].astype(int)
     logins['ato'] = logins['ato'].astype(int)
-
+    return logins
 def dropping_nas(logins):
     # Tratando todas as linhas com inteiros ausentes
     logins['max_installations_on_related_devices'] = logins['max_installations_on_related_devices'].fillna(logins['max_installations_on_related_devices'].mean()) 
@@ -60,25 +60,28 @@ def transform_logins(logins):
     day_divider = 86400000 # one day has 86400000 ms
     logins['weekday'] = (logins['timestamp']/day_divider).values.astype(dtype='datetime64[D]')
     logins['weekday'] = logins['weekday'].dt.day_name()
-    # 2) Aparelhos por conta (int)
+    # 2) Frequencia de reinicialização (float) = boot_count / device_age_ms
+    logins['boot_frequency_per_day'] = (logins['boot_count'] / logins['device_age_ms'])/day_divider
 
     # 3) Wallpaper por contas no dispositivo (float)
     logins['wallpaper_per_accounts'] = logins['wallpaper_count']/logins['n_accounts']
+
     # 4) Download Externo (bool) = root (true) + loja oficial (false)
 
     #gambiarra -> logins['download_extern'] = logins.apply(lambda x: x['probable_root']*(1.0 - x['is_from_official_store']) , axis=1) 
-    logins['probable_root'] = logins['probable_root'].astype(int)
-    logins['is_from_official_store'] = logins['is_from_official_store'].astype(int)
     logins['download_extern'] = logins['probable_root'] & (~logins['is_from_official_store']) #converting to int, its possible to make bool operations
     
-    # 5) Instalação em dispositivo diferente? (bool) (count_installation_on_different_devices)
+    # 5) localização suspeita (bool) = has_fake_location_app  and has_fake_location_enabled and never_permitted_location_on_account
+
+    logins['suspicious location'] = logins['has_fake_location_app'] & logins['has_fake_location_enabled'] & logins['never_permitted_location_on_account']
     
     return logins
 if __name__ == "__main__":
     #converting_to_csv()
     logins = reading_loginsset('parquet')
     #print(logins.head())
-    bool_update = transform_bool(logins)
+    
     logins_dropna = dropping_nas(logins)
-    logins_updated = transform_logins(logins_dropna)
+    logins_transformed = transform_bool(logins_dropna)
+    logins_updated = transform_logins(logins_transformed)
     print(logins_updated)

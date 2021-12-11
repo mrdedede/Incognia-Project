@@ -41,7 +41,7 @@ Projeto de Engenharia de Dados da cadeira IF997
 3. Logins por dia da semana (pie chart)
 4. Logins por timestamp (plot)
 5. Média de logins por dia (plot)
-6. Aparelhos por conta em média, mediana e desvio padrão (bar chart)
+6. Aparelhos por conta em moda, média, mediana e desvio padrão (bar chart)
 7. Valor médio de reinicializações (bar chart)
 8. 
 9. 
