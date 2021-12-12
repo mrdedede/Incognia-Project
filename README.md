@@ -41,7 +41,7 @@ Projeto de Engenharia de Dados da cadeira IF997
 3. Logins por dia da semana (pie chart)
 4. Logins por timestamp (plot)
 5. Emulador VS Sem Emulador (pie chart)
-6. Aparelhos por conta em moda, média, mediana e desvio padrão (bar chart)
+6. Contas por aparelho em moda, média, mediana e desvio padrão (bar chart)
 7. Valor médio, mediana e moda de reinicializações (bar chart)
 8. Valor médio, mediana e moda de reinicializações diário (bar chart)
 9. Média, Mediana e Desvio Padrão de apps máximos instalados por dispositivo

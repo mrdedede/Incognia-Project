@@ -136,6 +136,9 @@ def create_new_columns(logins):
 
     logins['suspicious_location'] = logins['has_fake_location_app'] & logins['has_fake_location_enabled'] & logins['never_permitted_location_on_account']
     
+    # Limpando erros que foram percebido num estágio posterior
+    logins = logins[logins['boot_frequency_per_day'].notna()]
+    
     return logins
 
 #Tudo abaixo dessa linha DEVE ser comentado após os commits, usar apenas para testes!!
