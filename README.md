@@ -40,21 +40,21 @@ Projeto de Engenharia de Dados da cadeira IF997
 2. Porcentagem de celulares rooteados (bar chart)
 3. Logins por dia da semana (pie chart)
 4. Logins por timestamp (plot)
-5. Média de logins por dia (plot)
+5. Emulador VS Sem Emulador (pie chart)
 6. Aparelhos por conta em moda, média, mediana e desvio padrão (bar chart)
-7. Valor médio de reinicializações (bar chart)
-8. 
-9. 
-10. 
+7. Valor médio, mediana e moda de reinicializações (bar chart)
+8. Valor médio, mediana e moda de reinicializações diário (bar chart)
+9. Média, Mediana e Desvio Padrão de apps máximos instalados por dispositivo
+10. Porcentagem de aplicativos instalados fora de loja oficial (pie chart)
 
 ## Perguntas a fazer:
 1. Será que dispositivos com mais contas por wallpapers tem associação com account takeover?
-2. O tempo que um dispositivo passa sem reiniciar tem alguma correlação com o evento de account takeover?
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
+2. Emuladores e Account Takeovers - Há relações?
+3. Root VS Sem root - Quais estão mais relacionados a account takeover?
+4. Quantidade de Wallpaper tem relação com account takeover?
+5. Quantos aparelhos tem instalações feitas fora de loja oficial? Qual a média?
+6. Download Externo (external_download) VS Evento de account takeover - Um heatmap
+7. Suspicious Location VS Evento de account takeover - Um heatmap
+8. Há relação entre a quantidade média de boots por dia e eventos de account takeover?
+9. Existe algum dia da semana onde ocorrem mais account takeovers?
+10. 
