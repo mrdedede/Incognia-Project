@@ -56,6 +56,10 @@ def transform_bool(logins):
                     ((logins['probable_root'] == 1) | (logins['probable_root'] == 0)) &
                     ((logins['never_permitted_location_on_account'] == 1) | (logins['never_permitted_location_on_account'] == 0)) &
                     ((logins['ato'] == 1) | (logins['ato'] == 0))]
+
+    # Deletando todas as linhas com string do timestamp
+    logins = [~(logins.timestamp == str)]
+    logins['timestamp'] = logins['timestamp'].astype(int)
     return logins
 
 def dropping_nas(logins):
@@ -138,6 +142,8 @@ def create_new_columns(logins):
     
     # Limpando erros que foram percebido num estágio posterior
     logins = logins[logins['boot_frequency_per_day'].notna()]
+    logins = logins[logins['timestamp'].notna()]
+    
     
     return logins
 
