@@ -57,9 +57,6 @@ def transform_bool(logins):
                     ((logins['never_permitted_location_on_account'] == 1) | (logins['never_permitted_location_on_account'] == 0)) &
                     ((logins['ato'] == 1) | (logins['ato'] == 0))]
 
-    # Deletando todas as linhas com string do timestamp
-    logins = [~(logins.timestamp == str)]
-    logins['timestamp'] = logins['timestamp'].astype(int)
     return logins
 
 def dropping_nas(logins):
@@ -126,8 +123,8 @@ def create_new_columns(logins):
     logins['weekday'] = (logins['timestamp']/day_divider).values.astype(dtype='datetime64[D]')
     logins['weekday'] = logins['weekday'].dt.day_name()
     # 2) Frequencia de reinicialização (float) = boot_count / device_age_ms
-    logins['boot_frequency_per_day'] = (logins['boot_count'] / logins['device_age_ms'])/day_divider
-
+    logins['boot_frequency_per_day'] = (logins['boot_count'] / (logins['device_age_ms']/day_divider))
+    
     # 3) Wallpaper por contas no dispositivo (float)
     logins['wallpaper_per_accounts'] = logins['wallpaper_count']/logins['n_accounts']
 
