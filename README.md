@@ -1,6 +1,8 @@
 # Incognia Project!
 Project for Data Engineering Course (IF997 CIn UFPE)
+
 Professor: Fernando de Paula
+
 Group: Andre Filho; Yves Lawrrence; Victor Ximenes
 
 All logic from the app can be found in either graficos.ipynb and processamento.py
