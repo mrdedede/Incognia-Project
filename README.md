@@ -1,60 +1,67 @@
-# Projeto-Engenharia-de-Dados
-Projeto de Engenharia de Dados da cadeira IF997
+# Incognia Project!
+Project for Data Engineering Course (IF997 CIn UFPE)
+Professor: Fernando de Paula
+Group: Andre Filho; Yves Lawrrence; Victor Ximenes
 
-## Atitudes de Pre-processamento propostas:
-* Usar médias/medianas em linhas com inteiros pendentes
-* Deletar linhas com strings faltantes
-* Tentar tratar caso hajam dados diferentes de bool em colunas bool
-* Deletar linhas com booleanos faltantes
-* Deletar linhas com timestamps faltantes
+All logic from the app can be found in either graficos.ipynb and processamento.py
 
-## Transformações de Dados Propostas:
+## Proposed Pre-processing Steps:
+
+* Use means/medians in rows with missing integer values
+* Delete rows with missing strings
+* Attempt to handle non-boolean data in boolean columns
+* Delete rows with missing booleans
+* Delete rows with missing timestamps
+
+## Proposed Data Transformations:
+
 * timestamp (int) -> weekday (string)
 
-## Novas Colunas Propostas:
-* Aparelhos por conta (int)
-* Wallpaper por contas no dispositivo (float)
-* Download Externo (bool) = root (true) + loja oficial (false)
-* Instalação em dispositivo diferente? (bool) (count_installation_on_different_devices)
+## Proposed New Columns:
 
+* Devices per account (int)
+* Wallpapers per device account (float)
+* External Download (bool) = root (true) + official store (false)
+* Installation on different device? (bool) (count_installation_on_different_devices)
 
-## Coisas a pensar:
-1. Quais dados importam pra validação cadastral?
-  * Apps instalados da loja oficial?
-  * É emulador?
-  * Tem app de localização falsa?
-  * O aparelho tem root?
-  * Contas por aparelho
-  * Aparelhos por conta
-  * Dia do acesso da conta
+## Things to Consider:
 
-2. O que ajuda a identificar um dispositivo?
-  * ID do dispositivo
-  * Em quantos dispositivos diferentes essa conta fez uma instalação (num período de tempo determinado)
+1. What data is important for registration validation?
+ * Installed apps from official store?
+ * Is it an emulator?
+ * Does it have a fake location app?
+ * Is the device rooted?
+ * Accounts per device
+ * Devices per account
+ * Day of account access
+2. What helps to identify a device?
+ * Device ID
+ * How many different devices has this account installed on (in a certain period of time)?
+3. How does location behave on devices?
+ * Analyze the use of fake location and its activation
 
-3. Como a localização se comporta em dispositivos?
-  * Analisar uso de fake localização e sua ativação
+## Relevant Charts:
 
-## Gráficos Relevantes:
-1. Valor médio, valor máximo e desvio padrão da idade (bar chart)
-2. Porcentagem de celulares rooteados (bar chart)
-3. Logins por dia da semana (pie chart)
-4. Logins por timestamp (plot)
-5. Emulador VS Sem Emulador (pie chart)
-6. Contas por aparelho em moda, média, mediana e desvio padrão (bar chart)
-7. Valor médio, mediana e moda de reinicializações (bar chart)
-8. Valor médio, mediana e moda de reinicializações diário (bar chart)
-9. Média, Mediana e Desvio Padrão de apps máximos instalados por dispositivo
-10. Porcentagem de aplicativos instalados fora de loja oficial (pie chart)
+1. Mean value, maximum value, and standard deviation of age (bar chart)
+2. Percentage of rooted devices (bar chart)
+3. Logins by day of the week (pie chart)
+4. Logins by timestamp (plot)
+5. Emulator vs. Non-emulator (pie chart)
+6. Devices per account in mode, mean, median, and standard deviation (bar chart)
+7. Mean, median, and mode of restarts (bar chart)
+8. Mean, median, and mode of daily restarts (bar chart)
+9. Mean, median, and standard deviation of maximum apps installed per device
+10. Percentage of apps installed outside of the official store (pie chart)
 
-## Perguntas a fazer:
-1. Será que dispositivos com mais contas por wallpapers tem associação com account takeover?
-2. Emuladores e Account Takeovers - Há relações?
-3. Root VS Sem root - Quais estão mais relacionados a account takeover?
-4. Quantidade de Wallpaper tem relação com account takeover?
-5. Quantos aparelhos tem instalações feitas fora de loja oficial? Qual a média?
-6. Download Externo (external_download) VS Evento de account takeover - Um heatmap
-7. Suspicious Location VS Evento de account takeover - Um heatmap
-8. Há relação entre a quantidade média de boots por dia e eventos de account takeover?
-9. Existe algum dia da semana onde ocorrem mais account takeovers?
-10. Heatmap de correlações
+## Questions to Ask:
+
+1. Is there a correlation between devices with more accounts per wallpaper and account takeover?
+2. Emulators and Account Takeovers - Are they related?
+3. Root vs. Non-root - Which is more related to account takeover?
+4. Does the number of wallpapers have a correlation with account takeover?
+5. How many devices have installations made outside of the official store? What is the average?
+6. External Download (external_download) vs. Account Takeover Event - A heatmap
+7. Suspicious Location vs. Account Takeover Event - A heatmap
+8. Is there a correlation between the average number of boots per day and account takeover events?
+9. Is there any day of the week where account takeovers occur more frequently?
+10. Is there any correlation between each of the variables?
